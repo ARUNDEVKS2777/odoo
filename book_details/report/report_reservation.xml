@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_reservation" model="ir.actions.report">
+        <field name="name">Reservation_list</field>
+        <field name="model">reservation.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">book_details.report_reservation_details</field>
+        <field name="report_file">book_details.report_reservation_details</field>
+    </record>
+    <record id="action_reservation_template" model="ir.actions.report">
+        <field name="name">Reservation_list</field>
+        <field name="model">reservation.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">book_details.report_reservation_template</field>
+        <field name="report_file">book_details.report_reservation_template</field>
+    </record>
+</odoo>

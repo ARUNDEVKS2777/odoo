@@ -1,0 +1,11 @@
+<odoo>
+    <template id="website_product_availability" inherit_id="website_sale.product"
+              priority="4">
+        <xpath expr="//div[@id='add_to_cart_wrap']" position="after">
+            <t t-if="product.qty_available &lt; 0">
+                <h1>No Stock...</h1>
+            </t>
+            <div class="availability_messages o_not_editable"/>
+        </xpath>
+    </template>
+</odoo>

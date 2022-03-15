@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_inventory_books,access.inventory.books,model_inventory_books,base.group_user,1,1,1,1
+access_product_reservation,access.product.reservation,model_product_reservation,,1,1,1,1
+access_product_line,access.product.line,model_product_line,base.group_user,1,1,1,1
+access_reservation_report_wizard,access.reservation.report.wizard,model_reservation_report_wizard,base.group_user,1,1,1,1
+

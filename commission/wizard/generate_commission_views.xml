@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="generate_commission_wizard_view_form" model="ir.ui.view">
+            <field name="name">generate.commission.wizard.form</field>
+            <field name="model">generate.commission.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Wizard Form">
+                    <group class="oe_title">
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                        <field name="type"/>
+                        <field name="sales_team_ids" widget="many2many_tags" attrs="{'invisible':[('|'), ('type', '=', 'person'), ('type', '=', False)]}"/>
+                        <field name="sales_person_ids" widget="many2many_tags" attrs="{'invisible':[('|'), ('type', '=', 'team'), ('type', '=', False)]}"/>
+                    </group>
+                    <footer>
+                        <button name="action_generate_commission" string="Generate" type="object" class="btn-primary" data-hotkey="q"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    <record id="generate_commission_wizard_view_tree" model="ir.ui.view">
+            <field name="name">generate.commission.wizard.tree</field>
+            <field name="model">generate.commission.wizard</field>
+            <field name="arch" type="xml">
+                <tree string="Wizard Tree">
+                    <field name="sales_team_ids" widget="many2many_tags"/>
+                    <field name="sales_person_ids" widget="many2many_tags"/>
+                    <field name="plan" widget="many2many_tags"/>
+                    <field name="so_count"/>
+                    <field name="total"/>
+                    <field name="commission"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="generate_crm_commission_action" model="ir.actions.act_window">
+            <field name="name">Generate Commission</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">generate.commission.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="generate_commission_wizard_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+</odoo>

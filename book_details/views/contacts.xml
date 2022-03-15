@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="partner_inherit_form" model="ir.ui.view">
+        <field name="name">res.partner.inherited</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_invoice" type="object"
+                            class="btn btn-primary"
+                            id="action_invoice"
+                            string="Create Invoice"
+                            attrs="{'invisible':[('need_invoice','=',False)]}"
+                            groups="book_details.group_product_reservation_manager"/>
+                    <button name="action_dn" type="object"
+                            class="btn btn-primary"
+                            id="action_dn"
+                            string="Delivery Order"
+                            attrs="{'invisible':[('need_dn','=',False)]}"
+                            groups="book_details.group_product_reservation_manager"/>
+                </header>
+            </xpath>
+
+            <div class="oe_button_box" name="button_box">
+                <button name="action_reservations" type="object"
+                        class="" icon="fa-calendar">
+                    <div class="o_stat_info">
+                        <field name="reservation_count"
+                               class="o_stat_value"/>
+                        <span class="o_stat_text">Reservations</span>
+                    </div>
+                </button>
+            </div>
+
+            <field name="website" position="after">
+                <field name="book_owner"/>
+            </field>
+            <field name="vat" position="after">
+                <field name="need_invoice"
+                       groups="book_details.group_product_reservation_manager"
+                       type="object"/>
+                <field name="need_dn"
+                       groups="book_details.group_product_reservation_manager"/>
+            </field>
+
+            <!--            <field name="sale_order_count" position="before">-->
+            <!--                 <button name="action_invoice" type="object"-->
+            <!--                        class="btn btn-primary" id="action_invoice" string="Create Invoice"/>-->
+            <!--            </field>-->
+        </field>
+
+    </record>
+</odoo>

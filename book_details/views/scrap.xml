@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_scrap_search_view" model="ir.ui.view">
+            <field name="name">stock.scrap.search</field>
+            <field name="model">stock.scrap</field>
+            <field name="arch" type="xml">
+</odoo>

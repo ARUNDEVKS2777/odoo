@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_patient_form" model="ir.ui.view">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="bino"/>
+                    <field name="into"/>
+                    <field name="charo"/>
+                    <field name="mone" widget="monetary"/>
+                    <field name="flo" widget="monetary"/>
+                    <field name="currency" attrs="{'invisible': [(1, '=', 1)]}"/>
+                    <field name="man_1" options="{'no_open': True, 'no_create': True}"/>
+                    <field name="user_id" widget="many2one_avatar_user" string="User"/>
+                </group>
+
+            </form>
+        </field>
+    </record>
+<!--    <record id="view_patient_tree" model="ir.ui.view">-->
+<!--        <field name="name">hospital.patient.tree</field>-->
+<!--        <field name="model">hospital.patient</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                <field name="bino"/>-->
+<!--                <field name="mone" widget="monetary"/>-->
+<!--                <field name="flo" widget="monetary"/>-->
+<!--                <field name="currency" attrs="{'invisible': [(1, '=', 1)]}"/>-->
+<!--                <field name="man_1" options="{'no_open': True, 'no_create': True}"/>-->
+<!--                <field name="user_id" widget="many2one_avatar_user" string="User"/>-->
+<!--                <field name="activity_ids" widget="list_activity" optional="show"/>-->
+
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="hospital_patient_action" model="ir.actions.act_window">
+        <field name="name">Patient</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Empty...!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="inventory_books_details_root"
+              name="Hospital"
+              sequence="50"/>
+    <!--              parent="stock.menu_stock_root"/>-->
+
+    <menuitem id="inventory_books"
+              name="Hospital"
+              sequence="50"
+              parent="inventory_books_details_root"/>
+
+    <menuitem id="inventory_books_report"
+              name="Patient"
+              sequence="100"
+              parent="inventory_books"
+              action="hospital_patient_action"/>
+</odoo>

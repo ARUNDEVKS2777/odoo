@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_pos_from_so_form" model="ir.ui.view">
+        <field name="name">pos.from.so.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+<!--            <header>-->
+<!--                <field name="state" widget="statusbar"/>-->
+<!--            </header>-->
+            <xpath expr="//button[@name='action_quotation_send']" position="after">
+                <button name="%(pos_from_so.payment_pos_action)d" class="btn btn-primary" string="Pay at the Counter" type="action"
+                        context="{'default_so':id}" attrs="{'invisible':[('bool','=', True)]}"/>
+            </xpath>
+            <xpath expr="//page[@name='other_information']" position="inside">
+                <group>
+                    <group name="pos" string="POS">
+                        <field name="session"/>
+                        <field name="bool" attrs="{'invisible':[(1,'=', 1)]}"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record id="view_pos_order_inherit_form" model="ir.ui.view">-->
+<!--        <field name="name">pos.order.inherit.form</field>-->
+<!--        <field name="model">pos.order</field>-->
+<!--        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//button[@name='%(action_pos_payment)d']" position="attributes">-->
+<!--                <attribute name="context">-->
+<!--                    {'ord_id' :id}-->
+<!--                </attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

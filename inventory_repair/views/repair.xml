@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_inventory_repair_tree" model="ir.ui.view">
+        <field name="name">inventory_repair.tree</field>
+        <field name="model">inventory.repair</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sale_order_id"/>
+                <field name="customer_id"/>
+                <field name="product_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_inventory_repair_form" model="ir.ui.view">
+        <field name="name">inventory.repair.form</field>
+        <field name="model">inventory.repair</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,done,confirm"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sale_order_id" domain="[('state', '=', 'sale')]"/>
+                            <field name="customer_id"/>
+                        </group>
+                        <group>
+                            <field name="product_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                    <field name="activity_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="inventory_operation_reapir_action" model="ir.actions.act_window">
+        <field name="name">Repair</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">inventory.repair</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Empty...!
+            </p>
+        </field>
+    </record>
+    <menuitem id="inventory_operation_repair_root"
+              name="Repair"
+              sequence="50"
+              parent="stock.menu_stock_warehouse_mgmt"
+              action="inventory_operation_reapir_action"/>
+</odoo>

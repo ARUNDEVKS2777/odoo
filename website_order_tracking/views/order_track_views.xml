@@ -1,0 +1,178 @@
+<odoo>
+    <!--    <record id="transfers" model="website.menu">-->
+    <!--          <field name="name">Transfer</field>-->
+    <!--          <field name="url">/transfers</field>-->
+    <!--        </record>-->
+    <record id="menu_track" model="website.menu">
+        <field name="name">Track</field>
+        <field name="url">/track</field>
+        <field name="sequence" type="int">63</field>
+    </record>
+
+    <template id="warning">
+        <t t-call="website.layout">
+            <div class="oe_structure">
+                <div class="container">
+                    <center>
+                        <h2>Invalid Sale Order</h2>
+                    </center>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="order_tracking_view">
+        <t t-call="website.layout">
+            <div class="oe_structure">
+                <div class="container">
+                    <form class="" method="POST" action="/track_view">
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
+                        <center>
+                            <div>
+                                <div class="o_search input-group col-8 col-sm-6 col-md-4"
+                                     role="search">
+                                    <input type="text" name="search"
+                                           class="form-control border-info"
+                                           placeholder="SO Refernece"/>
+                                    <div class="input-group-append">
+                                        <button type="submit"
+                                                class="btn btn-info fa fa-search"
+                                                aria-label="Search"
+                                                title="Search"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </center>
+                    </form>
+                    <center>
+                        <h2>Tracing '<t t-esc="data.origin"/>'
+                        </h2>
+                    </center>
+
+
+                    <div class="wizard">
+                        <div class="progress-wizard">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a class="no-decoration">
+                                        <div id="wizard-step10"
+                                             class="progress-wizard-step active">
+                                            <div class="progress-wizard-bar d-none d-md-block"/>
+                                            <span class="progress-wizard-dot d-none d-md-inline-block"></span>
+                                            <div class="text-center progress-wizard-steplabel">
+                                                Order confirmed
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <a class="no-decoration">
+                                        <t t-if="data.state == 'draft' or data.state == 'waiting' or data.state == 'confirmed'">
+                                            <div id="wizard-step20"
+                                                 class="progress-wizard-step">
+                                                <div class="progress-wizard-bar d-none d-md-block"/>
+                                                <span class="progress-wizard-dot d-none d-md-inline-block"></span>
+                                                <div class="text-center progress-wizard-steplabel">
+                                                    To Validate
+                                                </div>
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <div id="wizard-step20"
+                                                 class="progress-wizard-step active">
+                                                <div class="progress-wizard-bar d-none d-md-block"/>
+                                                <span class="progress-wizard-dot d-none d-md-inline-block"></span>
+                                                <div class="text-center progress-wizard-steplabel">
+                                                    Ready For Delivery
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <a class="no-decoration">
+                                        <t t-if="data.state=='assigned' or data.state == 'done'">
+                                            <div id="wizard-step30"
+                                                 class="progress-wizard-step active">
+                                                <div class="progress-wizard-bar d-none d-md-block"/>
+                                                <span class="progress-wizard-dot d-none d-md-inline-block"></span>
+                                                <div class="text-center progress-wizard-steplabel">
+                                                    Out for delivery from
+                                                    <t t-esc="data.from_place.name"/>
+                                                </div>
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <div id="wizard-step30"
+                                                 class="progress-wizard-step">
+                                                <div class="progress-wizard-bar d-none d-md-block"/>
+                                                <span class="progress-wizard-dot d-none d-md-inline-block"></span>
+                                                <div class="text-center progress-wizard-steplabel">
+                                                    Out for delivery
+                                                </div>
+                                            </div>
+                                        </t>
+                                        </a>
+                                </div>
+                                <div class="col-md-3">
+                                        <a>
+                                        <t t-if="data.state == 'done'">
+                                            <div id="wizard-step40"
+                                                 class="progress-wizard-step active">
+                                                <div class="progress-wizard-bar d-none d-md-block"/>
+                                                <div class="progress-wizard-dot d-none d-md-inline-block"></div>
+                                                <div class="text-center progress-wizard-steplabel">
+                                                    Delivered at
+                                                    <t t-esc="data.to_place.name"/>
+                                                </div>
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <div id="wizard-step40"
+                                                 class="progress-wizard-step">
+                                                <div class="progress-wizard-bar d-none d-md-block"/>
+                                                <div class="progress-wizard-dot d-none d-md-inline-block"></div>
+                                                <div class="text-center progress-wizard-steplabel">
+                                                    Delivered
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </a>
+                                </div>
+<!--                            </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="order_tracking_template">
+        <t t-call="website.layout">
+            <div class="oe_structure">
+                <div class="container">
+                    <form class="" method="POST" action="/track_view">
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
+                        <center>
+                            <div>
+                                <div class="o_search input-group col-8 col-sm-6 col-md-4"
+                                     role="search">
+                                    <input type="text" name="search"
+                                           class="form-control border-info"
+                                           placeholder="SO Refernece"/>
+                                    <div class="input-group-append">
+                                        <button type="submit"
+                                                class="btn btn-info fa fa-search"
+                                                aria-label="Search"
+                                                title="Search"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
